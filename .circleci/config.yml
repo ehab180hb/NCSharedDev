@@ -1,0 +1,44 @@
+
+version: 2
+jobs:
+  build-job:
+    docker:
+      - image: naturalcycles/ci-slim:latest
+    working_directory: ~/repo
+    steps:
+      - checkout
+
+      # env
+      - run: echo 'export GIT_MSG=`git log -1 --pretty=%B`' >> $BASH_ENV
+      - run: printenv
+
+      # yarn
+      - restore_cache:
+          key: dependencies-{{ .Environment.CIRCLE_PROJECT_REPONAME }}-v1-{{ checksum "yarn.lock" }}
+      - run: yarn --pure-lockfile
+      - save_cache:
+          paths:
+            - node_modules
+          key: dependencies-{{ .Environment.CIRCLE_PROJECT_REPONAME }}-v1-{{ checksum "yarn.lock" }}
+
+      # npm publish
+      - run:
+          name: npm publish
+          command: |
+            NPM_TAG=latest
+            echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > ~/.npmrc
+            NPM_VER_NEXT=1.0.$CIRCLE_BUILD_NUM
+            npm version $NPM_VER_NEXT -m "version: %s [ci skip]: $GIT_MSG"
+            npm publish --access restricted --tag $NPM_TAG
+            # Don't push, to have less commits, less problems with [ci skip], etc
+            #git push --set-upstream origin $CIRCLE_BRANCH
+
+workflows:
+  version: 2
+  shared-dev-workflow:
+    jobs:
+      - build-job:
+          context: org-global
+          filters:
+            branches:
+              only: master
