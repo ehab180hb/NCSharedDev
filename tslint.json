@@ -86,7 +86,6 @@
         "variable-declaration": "nospace"
       }
     ],
-    "typeof-compare": true,
     "unified-signatures": false,
     "valid-typeof": true,
     "variable-name": [
