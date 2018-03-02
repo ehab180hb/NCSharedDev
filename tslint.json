@@ -1,6 +1,4 @@
 {
-  "extends": ["tslint-eslint-rules"],
-
   "rules": {
     "adjacent-overload-signatures": true,
     "align": [true, "parameters"],
