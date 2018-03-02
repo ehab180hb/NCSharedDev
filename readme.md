@@ -4,9 +4,19 @@ To be installed as __dev__ dependency:
 
     yarn add -D @naturalcycles/shared-dev
     
-Upgrade with the same command:
+Upgrade it like this:
 
-    yarn add -D @naturalcycles/shared-dev
+    yarn upgrade @naturalcycles/shared-dev
+    
+# Idea
+
+Only dependencies that's gonna be used as __dev__ dependencies should be added here.
+
+If package has a chance to be a part of __prod__ dependencies - __DON'T__ add it, to avoid
+many different versions installed at the same time.
+
+If package has peerDependencies, or some other package peer-depend on it - __DON'T__ add it, cause
+it will show `warning: missing peerDependency` in the main package. Example - things that depend on `jest`.
 
 ## Common deps
 
