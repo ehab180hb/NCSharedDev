@@ -29,7 +29,7 @@
     "no-misused-new": true,
     "no-namespace": [false, "allow-declarations"],
     "no-non-null-assertion": false,
-    "no-null-keyword": true,
+    "no-null-keyword": false,
     "no-reference": true,
     "no-require-imports": false,
     "no-shadowed-variable": false,
