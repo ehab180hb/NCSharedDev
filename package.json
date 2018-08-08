@@ -1,15 +1,10 @@
 {
   "name": "@ehab_khaireldin/shared-dev",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "This package is installed as DevDependency.",
-  "scripts": {},
-  "dependencies": {},
-  "devDependencies": {},
-  "peerDependencies": {},
   "repository": {
     "type": "git",
     "url": "git@github.com:ehab180hb/SharedDev.git"
   },
-  "author": "Natural Cycles Team",
   "license": "ISC"
 }
